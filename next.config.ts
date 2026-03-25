@@ -4,9 +4,7 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
-  experimental: {
-    outputFileTracingRoot: __dirname,
-  },
+  basePath: "/vendybites",
 };
 
 export default nextConfig;

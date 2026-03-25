@@ -1,9 +1,14 @@
 "use client";
 
+const MINT  = "#aaf0ee";
+const AMBER = "#fed383";
+
 const items = [
-  "🍫 CHOCOLATE", "🥤 COLD DRINKS", "🍬 CANDY", "🥜 TRAIL MIX",
-  "⚡ ENERGY DRINKS", "🍪 COOKIES", "🥨 PRETZELS", "☕ COLD BREW",
-  "🌾 GRANOLA BARS", "💧 SPARKLING WATER", "🐻 GUMMY BEARS", "🥔 CHIPS",
+  "🍿 SNACKS & DRINKS", "💄 BEAUTY & LASH", "🍜 RAMEN & HOT FOODS",
+  "🤖 AI TREND TECH", "💳 CASH · CARD · TAP", "🎛️ FULLY CUSTOM",
+  "🥤 COLD DRINKS", "✨ PRESS-ON LASHES", "🥜 TRAIL MIX",
+  "📱 TAP TO PAY", "🌶️ SPICY MISO RAMEN", "♻️ ECO FRIENDLY",
+  "🐻 GUMMY BEARS", "💅 NAIL WRAPS", "☕ COLD BREW", "🤝 24/7 SUPPORT",
 ];
 
 export default function Marquee() {
@@ -12,17 +17,14 @@ export default function Marquee() {
   return (
     <div
       className="py-4 overflow-hidden border-y"
-      style={{
-        borderColor: "rgba(255,230,0,0.15)",
-        background: "rgba(255,230,0,0.03)",
-      }}
+      style={{ borderColor: `${MINT}20`, background: `${MINT}05` }}
     >
       <div className="marquee-inner">
         {doubled.map((item, i) => (
           <div
             key={i}
             className="flex items-center gap-2 px-8 text-sm font-bold tracking-widest whitespace-nowrap"
-            style={{ color: i % 3 === 0 ? "#FFE600" : i % 3 === 1 ? "#FF6B00" : "rgba(255,255,255,0.4)" }}
+            style={{ color: i % 3 === 0 ? MINT : i % 3 === 1 ? AMBER : "rgba(255,255,255,0.35)" }}
           >
             {item}
             <span className="text-white/10 ml-8">◆</span>

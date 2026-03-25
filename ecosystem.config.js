@@ -4,7 +4,7 @@ module.exports = {
       name: "vendybites",
       script: "npm",
       args: "start",
-      cwd: "/home/nick/services/vendybites/.claude/worktrees/awesome-hofstadter",
+      cwd: "/home/nick/services/vendybites",
       env: {
         NODE_ENV: "production",
         PORT: 3002,

@@ -2,11 +2,15 @@
 
 import { motion } from "framer-motion";
 
+const MINT  = "#aaf0ee";
+const AMBER = "#fed383";
+
 export default function Footer() {
   return (
     <footer
+      id="contact"
       className="border-t px-6 py-16"
-      style={{ borderColor: "rgba(255,230,0,0.1)", background: "rgba(255,255,255,0.01)" }}
+      style={{ borderColor: `${MINT}15`, background: "rgba(255,255,255,0.01)" }}
     >
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row justify-between items-start gap-12">
@@ -16,18 +20,19 @@ export default function Footer() {
               <div
                 className="w-10 h-10 rounded-xl flex items-center justify-center text-xl font-black"
                 style={{
-                  background: "linear-gradient(135deg, #FFE600, #FF6B00)",
-                  boxShadow: "0 0 20px rgba(255,230,0,0.3)",
+                  background: `linear-gradient(135deg, ${MINT}, ${AMBER})`,
+                  boxShadow:  `0 0 20px ${MINT}50`,
+                  color: "#0A0A0F",
                 }}
               >
                 V
               </div>
               <span className="font-black text-2xl">
-                Vendy<span style={{ color: "#FFE600" }}>Bites</span>
+                Vendy<span style={{ color: MINT }}>Bites</span>
               </span>
             </div>
             <p className="text-white/30 text-sm max-w-xs leading-relaxed">
-              Premium vending machines for modern spaces. Fresh snacks, cashless payments, always stocked.
+              Premium vending machines for modern spaces. Customizable, cashless, and always stocked.
             </p>
             <div className="flex gap-3">
               {["𝕏", "📘", "📸", "▶"].map((icon, i) => (
@@ -35,11 +40,7 @@ export default function Footer() {
                   key={i}
                   className="w-9 h-9 rounded-lg flex items-center justify-center text-sm cursor-pointer border border-white/10"
                   style={{ background: "rgba(255,255,255,0.03)" }}
-                  whileHover={{
-                    scale: 1.1,
-                    borderColor: "#FFE600",
-                    background: "rgba(255,230,0,0.1)",
-                  }}
+                  whileHover={{ scale: 1.1, borderColor: MINT, background: `${MINT}15` }}
                 >
                   {icon}
                 </motion.div>
@@ -55,11 +56,11 @@ export default function Footer() {
             },
             {
               title: "Company",
-              links: ["About Us", "Locations", "Careers", "Press", "Blog"],
+              links: ["About Us", "Careers", "Press", "Blog", "Sustainability"],
             },
             {
               title: "Support",
-              links: ["Help Center", "Report Issue", "Contact", "Refunds", "Machine Request"],
+              links: ["Help Center", "Report Issue", "Contact", "Refunds", "Request a Machine"],
             },
           ].map((col) => (
             <div key={col.title} className="space-y-4">
@@ -87,12 +88,10 @@ export default function Footer() {
           className="mt-16 pt-8 border-t flex flex-col sm:flex-row justify-between items-center gap-4"
           style={{ borderColor: "rgba(255,255,255,0.05)" }}
         >
+          <p className="text-white/20 text-sm">© 2026 VendyBites. All rights reserved.</p>
           <p className="text-white/20 text-sm">
-            © 2026 VendyBites. All rights reserved.
-          </p>
-          <p className="text-white/20 text-sm">
-            Made with <span style={{ color: "#FF0080" }}>♥</span> and{" "}
-            <span style={{ color: "#FFE600" }}>snacks</span>
+            Made with <span style={{ color: "#FF9DE2" }}>♥</span> and{" "}
+            <span style={{ color: MINT }}>snacks</span>
           </p>
         </div>
       </div>
