@@ -3,8 +3,8 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 
 export const metadata: Metadata = {
-  title: "VendyBites — Snacks, Your Way",
-  description: "Premium customizable vending machines for any product, any space. Beauty, ramen, snacks, and more.",
+  title: "VendyBites — Connecticut's Vending, Done Right.",
+  description: "Modern vending machines for Connecticut businesses. Brand new machines, AI-powered inventory, local people, real support. Serving Fairfield County, Hartford, New Haven, and beyond.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

@@ -17,10 +17,10 @@ body {
 
 /* Neon glow utilities */
 .glow-mint {
-  text-shadow: 0 0 20px #aaf0ee, 0 0 40px #aaf0ee, 0 0 80px #aaf0ee;
+  text-shadow: 0 0 10px rgba(170, 240, 238, 0.55), 0 0 24px rgba(170, 240, 238, 0.28);
 }
 .glow-amber {
-  text-shadow: 0 0 20px #fed383, 0 0 40px #fed383, 0 0 80px #fed383;
+  text-shadow: 0 0 10px rgba(254, 211, 131, 0.55), 0 0 24px rgba(254, 211, 131, 0.28);
 }
 
 .box-glow-mint {

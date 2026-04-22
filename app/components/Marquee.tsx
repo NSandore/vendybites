@@ -4,11 +4,21 @@ const MINT  = "#aaf0ee";
 const AMBER = "#fed383";
 
 const items = [
-  "🍿 SNACKS & DRINKS", "💄 BEAUTY & LASH", "🍜 RAMEN & HOT FOODS",
-  "🤖 AI TREND TECH", "💳 CASH · CARD · TAP", "🎛️ FULLY CUSTOM",
-  "🥤 COLD DRINKS", "✨ PRESS-ON LASHES", "🥜 TRAIL MIX",
-  "📱 TAP TO PAY", "🌶️ SPICY MISO RAMEN", "♻️ ECO FRIENDLY",
-  "🐻 GUMMY BEARS", "💅 NAIL WRAPS", "☕ COLD BREW", "🤝 24/7 SUPPORT",
+  "Connecticut Local",
+  "Brand New Machines",
+  "AI-Powered Inventory",
+  "Self-Vend Technology",
+  "Card + Cash + Tap Accepted",
+  "Fairfield County",
+  "Hartford",
+  "New Haven",
+  "Zero Hassle Setup",
+  "Direct Founder Support",
+  "Food + Beverages",
+  "Beauty + Wellness",
+  "Specialty Machines",
+  "No Call Centers",
+  "Real People. Real Support.",
 ];
 
 export default function Marquee() {
@@ -23,8 +33,8 @@ export default function Marquee() {
         {doubled.map((item, i) => (
           <div
             key={i}
-            className="flex items-center gap-2 px-8 text-sm font-bold tracking-widest whitespace-nowrap"
-            style={{ color: i % 3 === 0 ? MINT : i % 3 === 1 ? AMBER : "rgba(255,255,255,0.35)" }}
+            className="flex items-center gap-2 px-8 text-xs font-bold tracking-widest whitespace-nowrap uppercase"
+            style={{ color: i % 3 === 0 ? MINT : i % 3 === 1 ? AMBER : "rgba(255,255,255,0.3)" }}
           >
             {item}
             <span className="text-white/10 ml-8">◆</span>
