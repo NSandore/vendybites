@@ -89,7 +89,7 @@ export default function ContactPage() {
                 {[
                   { label: "Name",         key: "name",    type: "text",  placeholder: "Your name",          required: true  },
                   { label: "Email",        key: "email",   type: "email", placeholder: "you@example.com",    required: true  },
-                  { label: "Phone",        key: "phone",   type: "tel",   placeholder: "(475) 337-7461",     required: false },
+                  { label: "Phone",        key: "phone",   type: "tel",   placeholder: "(203) XXX-XXXX",     required: false },
                 ].map(({ label, key, type, placeholder, required }) => (
                   <div key={key}>
                     <label className="block text-xs font-bold text-white/40 uppercase tracking-widest mb-2">
@@ -148,8 +148,7 @@ export default function ContactPage() {
             <div>
               <h2 className="text-3xl font-black text-white mb-3">We&apos;re here.</h2>
               <p className="text-white/50 leading-relaxed">
-                Prefer to call or text? Reach us directly — no menus, no hold music.
-                You&apos;ll get one of us on the other end.
+                Prefer to call or text? Reach us directly!
               </p>
             </div>
 

@@ -219,9 +219,7 @@ export default function ForBusinessesPage() {
             </h2>
             <p className="text-white/50 text-lg leading-relaxed max-w-2xl mx-auto">
               We offer far more than chips and soda. Food, drinks, beauty, and niche specialty
-              machines means we can serve almost any audience. A gym gets protein bars and
-              electrolytes. A law firm gets premium snacks and quality coffee. A salon gets
-              nail kits and lash accessories. The right machine for the right space — every time.
+              machines means we can serve almost any audience. The right machine for the right space — every time.
             </p>
           </motion.div>
         </div>
@@ -241,14 +239,13 @@ export default function ForBusinessesPage() {
               THE DIFFERENCE
             </div>
             <h2 className="text-4xl font-black text-white leading-tight">
-              Big vending companies are slow,<br />
+              Big vending companies can be slow,<br />
               <span style={{ color: AMBER }}>hard to reach, and treat every location the same.</span>
             </h2>
             <p className="text-white/50 text-lg leading-relaxed">
-              We&apos;re the opposite. No automated phone trees. No 5-day response windows.
+              We aim to do the opposite. No automated phone trees. No 5-day response windows.
               No one-size-fits-all stocking. When you have a question or a problem,
-              you&apos;re talking to the people who actually run this company — not a support rep
-              reading from a script.
+              you&apos;re talking to the same people every time.
             </p>
           </motion.div>
 
@@ -268,11 +265,10 @@ export default function ForBusinessesPage() {
                 DIRECT CONTACT PROMISE
               </div>
               <p className="text-white font-semibold leading-relaxed">
-                Every VendyBites partner works directly with our founders. Not a rep. Not a helpline.{" "}
-                <span style={{ color: MINT }}>Us.</span>
+                Every VendyBites partner works directly with our founders.
               </p>
               <p className="text-white/40 text-sm leading-relaxed">
-                You&apos;ll have our direct contact from day one. Most issues get resolved the same day.
+                You&apos;ll have our direct contact from day one.
               </p>
               <div className="flex items-center gap-3 pt-2">
                 <div

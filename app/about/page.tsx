@@ -23,7 +23,7 @@ const commitments = [
   {
     icon: "◉",
     title: "The right fit",
-    desc: "We don&apos;t place machines just to place them. If your space isn&apos;t a good fit for what we offer, we&apos;ll tell you. We only work with businesses we can genuinely serve well.",
+    desc: "We don't place machines just to place them. If your space isn&apos;t a good fit for what we offer, we&apos;ll tell you. We only work with businesses we can genuinely serve well.",
     color: MINT,
   },
 ];
@@ -75,7 +75,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
           >
             VendyBites is Connecticut&apos;s modern vending company — built on the idea that
-            businesses deserve better machines, better products, and better service than
+            businesses and customers deserve better machines, better products, and better service than
             the industry standard.
           </motion.p>
         </div>
@@ -104,15 +104,15 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               {
-                initials: "F1",
-                name: "Founder Name",
+                initials: "NS",
+                name: "Nicholas Sandore",
                 role: "Co-Founder",
                 bio: "Connecticut native with a background in operations and business development. Brings years of experience building client relationships and running things efficiently — the kind of experience that makes a vending partnership actually work.",
                 color: MINT,
               },
               {
-                initials: "F2",
-                name: "Founder Name",
+                initials: "SL",
+                name: "Silvia Lopez",
                 role: "Co-Founder",
                 bio: "Born and raised in CT, with deep roots in tech and product development. Handles the systems side of VendyBites — the AI inventory tools, machine monitoring, and everything that keeps operations running smoothly.",
                 color: AMBER,
