@@ -444,7 +444,7 @@ export default function Home() {
               Tell us about your business and we&apos;ll figure out the right machine together.
               No commitment required.
             </p>
-            <Link href="/for-businesses">
+            <Link href="/for-businesses#partner-form">
               <motion.button
                 className="px-10 py-4 rounded-2xl font-bold text-lg"
                 style={{
@@ -455,9 +455,17 @@ export default function Home() {
                 whileHover={{ scale: 1.05, boxShadow: `0 0 60px ${MINT}80` }}
                 whileTap={{ scale: 0.95 }}
               >
-                Partner With Us
+                Start Your Request
               </motion.button>
             </Link>
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-4 text-sm">
+              <Link href="/contact" className="text-white/60 transition-colors hover:text-white">
+                Prefer a quick question first?
+              </Link>
+              <a href="tel:+14753377461" className="transition-colors" style={{ color: MINT }}>
+                Call or text (475) 337-7461
+              </a>
+            </div>
           </motion.div>
         </div>
       </section>

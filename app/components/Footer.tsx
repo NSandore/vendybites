@@ -33,7 +33,7 @@ const navCols = [
       { label: "About Us",       href: "/about"          },
       { label: "For Businesses", href: "/for-businesses" },
       { label: "Contact",        href: "/contact"        },
-      { label: "Partner With Us", href: "/for-businesses" },
+      { label: "Partner With Us", href: "/for-businesses#partner-form" },
     ],
   },
 ];
@@ -72,6 +72,14 @@ export default function Footer() {
             <p className="text-xs font-medium" style={{ color: `${MINT}80` }}>
               Based in Connecticut. Built for Connecticut businesses.
             </p>
+            <div className="space-y-2 pt-2 text-sm">
+              <a href="mailto:hello@vendybites.com" className="block text-white/50 transition-colors hover:text-white">
+                hello@vendybites.com
+              </a>
+              <a href="tel:+14753377461" className="block transition-colors hover:opacity-100" style={{ color: `${AMBER}cc` }}>
+                (475) 337-7461
+              </a>
+            </div>
           </div>
 
           {/* Links */}

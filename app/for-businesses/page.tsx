@@ -113,6 +113,199 @@ export default function ForBusinessesPage() {
         </div>
       </section>
 
+      {/* ── Quick Contact Paths ── */}
+      <section className="px-6 pb-8">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
+          <a
+            href="#partner-form"
+            className="rounded-2xl border p-6 transition-colors"
+            style={{ background: `${MINT}08`, borderColor: `${MINT}25` }}
+          >
+            <div className="text-xs font-bold tracking-widest mb-3" style={{ color: MINT }}>
+              FASTEST PATH
+            </div>
+            <h2 className="text-2xl font-black text-white mb-2">Start the 60-second form</h2>
+            <p className="text-white/45 text-sm leading-relaxed">
+              Skip the scroll. Jump straight to the partner request form.
+            </p>
+          </a>
+
+          <a
+            href="tel:+14753377461"
+            className="rounded-2xl border p-6 transition-colors"
+            style={{ background: `${AMBER}08`, borderColor: `${AMBER}25` }}
+          >
+            <div className="text-xs font-bold tracking-widest mb-3" style={{ color: AMBER }}>
+              CALL OR TEXT
+            </div>
+            <h2 className="text-2xl font-black text-white mb-2">(475) 337-7461</h2>
+            <p className="text-white/45 text-sm leading-relaxed">
+              Reach us directly if you want a faster conversation.
+            </p>
+          </a>
+
+          <a
+            href="mailto:hello@vendybites.com"
+            className="rounded-2xl border p-6 transition-colors"
+            style={{ background: "rgba(255,255,255,0.04)", borderColor: "rgba(255,255,255,0.12)" }}
+          >
+            <div className="text-xs font-bold tracking-widest mb-3 text-white/50">
+              EMAIL US
+            </div>
+            <h2 className="text-2xl font-black text-white mb-2">hello@vendybites.com</h2>
+            <p className="text-white/45 text-sm leading-relaxed">
+              Send the basics and we&apos;ll reply directly.
+            </p>
+          </a>
+        </div>
+      </section>
+
+      {/* ── Partner Interest Form ── */}
+      <section className="py-16 px-6 scroll-mt-32" id="partner-form">
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          >
+            <div
+              className="inline-block px-4 py-1 rounded-full text-xs font-bold tracking-widest mb-4"
+              style={{ background: `${MINT}15`, color: MINT }}
+            >
+              PARTNER WITH US
+            </div>
+            <h2 className="text-5xl font-black text-white mb-4">Let&apos;s get started.</h2>
+            <p className="text-white/40 text-lg max-w-lg mx-auto">
+              Fill out the form and we&apos;ll reach out directly, usually within 24 hours.
+              No commitment, no obligation. Just a conversation.
+            </p>
+          </motion.div>
+
+          <AnimatePresence mode="wait">
+            {submitted ? (
+              <motion.div
+                key="success"
+                className="text-center py-20 px-8 rounded-3xl border"
+                style={{ background: `${MINT}08`, borderColor: `${MINT}30` }}
+                initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }} transition={{ duration: 0.4, type: "spring" }}
+              >
+                <motion.div
+                  className="text-7xl mb-6"
+                  initial={{ scale: 0, rotate: -20 }} animate={{ scale: 1, rotate: 0 }}
+                  transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
+                >
+                  🎉
+                </motion.div>
+                <h3 className="text-3xl font-black text-white mb-3">We Got It!</h3>
+                <p className="text-white/45 text-lg max-w-sm mx-auto mb-8">
+                  We&apos;ll reach out to you directly, usually within 24 hours.
+                </p>
+                <button
+                  className="px-8 py-3 rounded-full text-sm font-bold"
+                  style={{ background: `${MINT}18`, border: `1px solid ${MINT}40`, color: MINT }}
+                  onClick={() => {
+                    setSubmitted(false);
+                    setForm({ name: "", business: "", city: "", spaceType: "", footTraffic: "", productCategory: "", contact: "", notes: "" });
+                  }}
+                >
+                  Submit Another
+                </button>
+              </motion.div>
+            ) : (
+              <motion.form
+                key="form"
+                onSubmit={handleSubmit}
+                className="space-y-5"
+                style={{ background: "rgba(255,255,255,0.02)", border: `1px solid ${MINT}15`, borderRadius: "1.5rem", padding: "2.5rem" }}
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }} transition={{ duration: 0.4 }}
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  {field("name", "Your Name", "Jane Smith")}
+                  {field("business", "Business Name", "Acme Fitness")}
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  {field("city", "City or Town in CT", "Stamford, CT")}
+                  <div>
+                    <label className="block text-xs font-bold text-white/40 uppercase tracking-widest mb-2">
+                      Type of Space<span style={{ color: AMBER }}> *</span>
+                    </label>
+                    <select
+                      required
+                      value={form.spaceType}
+                      onChange={(e) => setForm({ ...form, spaceType: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none transition-all"
+                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = `${MINT}60`)}
+                      onBlur={(e)  => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)")}
+                    >
+                      <option value="" style={{ background: "#0A0A0F" }}>Select type...</option>
+                      {spaceTypes.map((t) => (
+                        <option key={t} value={t} style={{ background: "#0A0A0F" }}>{t}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  {field("footTraffic", "Estimated Daily Foot Traffic", "e.g. ~200 employees", "text", false)}
+                  <div>
+                    <label className="block text-xs font-bold text-white/40 uppercase tracking-widest mb-2">
+                      Preferred Product Category
+                    </label>
+                    <select
+                      value={form.productCategory}
+                      onChange={(e) => setForm({ ...form, productCategory: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none transition-all"
+                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = `${MINT}60`)}
+                      onBlur={(e)  => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)")}
+                    >
+                      <option value="" style={{ background: "#0A0A0F" }}>Select...</option>
+                      {productCategories.map((c) => (
+                        <option key={c} value={c} style={{ background: "#0A0A0F" }}>{c}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                {field("contact", "Phone or Email", "your@email.com or (475) 337-7461")}
+                <div>
+                  <label className="block text-xs font-bold text-white/40 uppercase tracking-widest mb-2">
+                    Anything else we should know
+                    <span className="normal-case font-normal text-white/25 ml-1">(optional)</span>
+                  </label>
+                  <textarea
+                    placeholder="Tell us anything that might help — timeline, specific products you have in mind, or what problem you're trying to solve..."
+                    rows={4}
+                    value={form.notes}
+                    onChange={(e) => setForm({ ...form, notes: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none transition-all resize-none"
+                    style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
+                    onFocus={(e) => (e.currentTarget.style.borderColor = `${MINT}60`)}
+                    onBlur={(e)  => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)")}
+                  />
+                </div>
+                <motion.button
+                  type="submit"
+                  className="w-full py-4 rounded-2xl font-bold text-lg mt-2"
+                  style={{
+                    background: `linear-gradient(135deg, ${MINT}, ${AMBER})`,
+                    color: "#0A0A0F",
+                    boxShadow: `0 0 30px ${MINT}50`,
+                  }}
+                  whileHover={{ scale: 1.02, boxShadow: `0 0 50px ${MINT}80` }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Send My Interest
+                </motion.button>
+                <p className="text-center text-white/25 text-xs">
+                  We typically respond within 24 hours. No commitment required. This is just the start of a conversation.
+                </p>
+              </motion.form>
+            )}
+          </AnimatePresence>
+        </div>
+      </section>
+
       {/* ── How It Works ── */}
       <section className="py-24 px-6">
         <div className="max-w-5xl mx-auto">
@@ -284,152 +477,6 @@ export default function ForBusinessesPage() {
               </div>
             </div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* ── Partner Interest Form ── */}
-      <section className="py-24 px-6" id="partner-form">
-        <div className="max-w-3xl mx-auto">
-          <motion.div
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          >
-            <div
-              className="inline-block px-4 py-1 rounded-full text-xs font-bold tracking-widest mb-4"
-              style={{ background: `${MINT}15`, color: MINT }}
-            >
-              PARTNER WITH US
-            </div>
-            <h2 className="text-5xl font-black text-white mb-4">Let&apos;s get started.</h2>
-            <p className="text-white/40 text-lg max-w-lg mx-auto">
-              Fill out the form and we&apos;ll reach out directly — usually within 24 hours.
-              No commitment, no obligation. Just a conversation.
-            </p>
-          </motion.div>
-
-          <AnimatePresence mode="wait">
-            {submitted ? (
-              <motion.div
-                key="success"
-                className="text-center py-20 px-8 rounded-3xl border"
-                style={{ background: `${MINT}08`, borderColor: `${MINT}30` }}
-                initial={{ opacity: 0, scale: 0.92 }} animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }} transition={{ duration: 0.4, type: "spring" }}
-              >
-                <motion.div
-                  className="text-7xl mb-6"
-                  initial={{ scale: 0, rotate: -20 }} animate={{ scale: 1, rotate: 0 }}
-                  transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
-                >
-                  🎉
-                </motion.div>
-                <h3 className="text-3xl font-black text-white mb-3">We Got It!</h3>
-                <p className="text-white/45 text-lg max-w-sm mx-auto mb-8">
-                  We&apos;ll reach out to you directly — usually within 24 hours.
-                </p>
-                <button
-                  className="px-8 py-3 rounded-full text-sm font-bold"
-                  style={{ background: `${MINT}18`, border: `1px solid ${MINT}40`, color: MINT }}
-                  onClick={() => {
-                    setSubmitted(false);
-                    setForm({ name: "", business: "", city: "", spaceType: "", footTraffic: "", productCategory: "", contact: "", notes: "" });
-                  }}
-                >
-                  Submit Another
-                </button>
-              </motion.div>
-            ) : (
-              <motion.form
-                key="form"
-                onSubmit={handleSubmit}
-                className="space-y-5"
-                style={{ background: "rgba(255,255,255,0.02)", border: `1px solid ${MINT}15`, borderRadius: "1.5rem", padding: "2.5rem" }}
-                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }} transition={{ duration: 0.4 }}
-              >
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  {field("name", "Your Name", "Jane Smith")}
-                  {field("business", "Business Name", "Acme Fitness")}
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  {field("city", "City or Town in CT", "Stamford, CT")}
-                  <div>
-                    <label className="block text-xs font-bold text-white/40 uppercase tracking-widest mb-2">
-                      Type of Space<span style={{ color: AMBER }}> *</span>
-                    </label>
-                    <select
-                      required
-                      value={form.spaceType}
-                      onChange={(e) => setForm({ ...form, spaceType: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none transition-all"
-                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = `${MINT}60`)}
-                      onBlur={(e)  => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)")}
-                    >
-                      <option value="" style={{ background: "#0A0A0F" }}>Select type...</option>
-                      {spaceTypes.map((t) => (
-                        <option key={t} value={t} style={{ background: "#0A0A0F" }}>{t}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  {field("footTraffic", "Estimated Daily Foot Traffic", "e.g. ~200 employees", "text", false)}
-                  <div>
-                    <label className="block text-xs font-bold text-white/40 uppercase tracking-widest mb-2">
-                      Preferred Product Category
-                    </label>
-                    <select
-                      value={form.productCategory}
-                      onChange={(e) => setForm({ ...form, productCategory: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none transition-all"
-                      style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = `${MINT}60`)}
-                      onBlur={(e)  => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)")}
-                    >
-                      <option value="" style={{ background: "#0A0A0F" }}>Select...</option>
-                      {productCategories.map((c) => (
-                        <option key={c} value={c} style={{ background: "#0A0A0F" }}>{c}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                {field("contact", "Phone or Email", "your@email.com or (475) 337-7461")}
-                <div>
-                  <label className="block text-xs font-bold text-white/40 uppercase tracking-widest mb-2">
-                    Anything else we should know
-                    <span className="normal-case font-normal text-white/25 ml-1">(optional)</span>
-                  </label>
-                  <textarea
-                    placeholder="Tell us anything that might help — timeline, specific products you have in mind, or what problem you're trying to solve..."
-                    rows={4}
-                    value={form.notes}
-                    onChange={(e) => setForm({ ...form, notes: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl text-white text-sm outline-none transition-all resize-none"
-                    style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)" }}
-                    onFocus={(e) => (e.currentTarget.style.borderColor = `${MINT}60`)}
-                    onBlur={(e)  => (e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)")}
-                  />
-                </div>
-                <motion.button
-                  type="submit"
-                  className="w-full py-4 rounded-2xl font-bold text-lg mt-2"
-                  style={{
-                    background: `linear-gradient(135deg, ${MINT}, ${AMBER})`,
-                    color: "#0A0A0F",
-                    boxShadow: `0 0 30px ${MINT}50`,
-                  }}
-                  whileHover={{ scale: 1.02, boxShadow: `0 0 50px ${MINT}80` }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Send My Interest
-                </motion.button>
-                <p className="text-center text-white/25 text-xs">
-                  We typically respond within 24 hours. No commitment required — this is just the start of a conversation.
-                </p>
-              </motion.form>
-            )}
-          </AnimatePresence>
         </div>
       </section>
 

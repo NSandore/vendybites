@@ -79,7 +79,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
-            <Link href="/for-businesses">
+            <Link href="/for-businesses#partner-form">
               <motion.button
                 className="px-8 py-4 rounded-2xl font-bold text-black text-lg relative overflow-hidden"
                 style={{
@@ -89,7 +89,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.05, boxShadow: `0 0 50px ${MINT}90` }}
                 whileTap={{ scale: 0.95 }}
               >
-                Partner With Us
+                Start Your Request
               </motion.button>
             </Link>
 
@@ -103,6 +103,20 @@ export default function Hero() {
                 See Our Machines
               </motion.button>
             </Link>
+          </motion.div>
+
+          <motion.div
+            className="flex flex-wrap items-center gap-4 text-sm"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <Link href="/contact" className="text-white/60 transition-colors hover:text-white">
+              Quick question? Contact us.
+            </Link>
+            <a href="tel:+14753377461" className="transition-colors" style={{ color: MINT }}>
+              Call or text (475) 337-7461
+            </a>
           </motion.div>
         </div>
       </div>

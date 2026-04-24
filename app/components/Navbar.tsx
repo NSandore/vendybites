@@ -91,7 +91,7 @@ export default function Navbar() {
 
       {/* CTA button */}
       <div className="flex items-center gap-3">
-        <Link href="/for-businesses">
+        <Link href="/for-businesses#partner-form">
           <motion.button
             className="hidden md:block px-5 py-2 rounded-full text-sm font-bold"
             style={{
@@ -102,7 +102,7 @@ export default function Navbar() {
             whileHover={{ scale: 1.05, boxShadow: `0 0 30px ${MINT}70` }}
             whileTap={{ scale: 0.95 }}
           >
-            Partner With Us
+            Start Request
           </motion.button>
         </Link>
 
@@ -149,7 +149,7 @@ export default function Navbar() {
               </span>
             </Link>
           ))}
-          <Link href="/for-businesses" onClick={() => setMenuOpen(false)}>
+          <Link href="/for-businesses#partner-form" onClick={() => setMenuOpen(false)}>
             <button
               className="w-full py-3 rounded-full text-sm font-bold mt-2"
               style={{
@@ -157,7 +157,7 @@ export default function Navbar() {
                 color: "#0A0A0F",
               }}
             >
-              Partner With Us
+              Start Request
             </button>
           </Link>
         </motion.div>
