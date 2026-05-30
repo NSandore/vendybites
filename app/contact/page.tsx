@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import Footer from "../components/Footer";
 
 const MINT  = "#aaf0ee";
@@ -10,10 +10,33 @@ const AMBER = "#fed383";
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [error, setError] = useState("");
+  const [isPending, startTransition] = useTransition();
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setSubmitted(true);
+    setError("");
+
+    startTransition(async () => {
+      const response = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          kind: "contact",
+          ...form,
+          companyWebsite: "",
+        }),
+      });
+
+      const result = (await response.json().catch(() => null)) as { error?: string } | null;
+
+      if (!response.ok) {
+        setError(result?.error ?? "We couldn't send your message right now.");
+        return;
+      }
+
+      setSubmitted(true);
+    });
   }
 
   return (
@@ -70,7 +93,7 @@ export default function ContactPage() {
                 <button
                   className="px-6 py-2 rounded-full text-sm font-bold"
                   style={{ background: `${MINT}18`, border: `1px solid ${MINT}40`, color: MINT }}
-                  onClick={() => { setSubmitted(false); setForm({ name: "", email: "", phone: "", message: "" }); }}
+                  onClick={() => { setSubmitted(false); setError(""); setForm({ name: "", email: "", phone: "", message: "" }); }}
                 >
                   Send Another
                 </button>
@@ -86,6 +109,14 @@ export default function ContactPage() {
                 <div>
                   <h2 className="text-3xl font-black text-white mb-8">Send a message.</h2>
                 </div>
+                <input
+                  type="text"
+                  name="companyWebsite"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  className="hidden"
+                  aria-hidden="true"
+                />
                 {[
                   { label: "Name",         key: "name",    type: "text",  placeholder: "Your name",          required: true  },
                   { label: "Email",        key: "email",   type: "email", placeholder: "you@example.com",    required: true  },
@@ -125,17 +156,20 @@ export default function ContactPage() {
                 </div>
                 <motion.button
                   type="submit"
+                  disabled={isPending}
                   className="w-full py-4 rounded-2xl font-bold"
                   style={{
                     background: `linear-gradient(135deg, ${MINT}, ${AMBER})`,
                     color: "#0A0A0F",
                     boxShadow: `0 0 30px ${MINT}50`,
+                    opacity: isPending ? 0.75 : 1,
                   }}
                   whileHover={{ scale: 1.02, boxShadow: `0 0 50px ${MINT}80` }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Send Message
+                  {isPending ? "Sending..." : "Send Message"}
                 </motion.button>
+                {error && <p className="text-sm text-red-300">{error}</p>}
               </motion.form>
             )}
           </AnimatePresence>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import Footer from "../components/Footer";
 
 const MINT  = "#aaf0ee";
@@ -33,6 +33,8 @@ export default function RequestPage() {
   const [submitted, setSubmitted] = useState(false);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [form, setForm] = useState({ name: "", email: "", company: "", location: "", foot: "", details: "" });
+  const [error, setError] = useState("");
+  const [isPending, startTransition] = useTransition();
 
   function toggleType(label: string) {
     setSelectedTypes((prev) => prev.includes(label) ? prev.filter((t) => t !== label) : [...prev, label]);
@@ -40,7 +42,29 @@ export default function RequestPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setSubmitted(true);
+    setError("");
+
+    startTransition(async () => {
+      const response = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          kind: "request",
+          ...form,
+          selectedTypes,
+          companyWebsite: "",
+        }),
+      });
+
+      const result = (await response.json().catch(() => null)) as { error?: string } | null;
+
+      if (!response.ok) {
+        setError(result?.error ?? "We couldn't send your request right now.");
+        return;
+      }
+
+      setSubmitted(true);
+    });
   }
 
   return (
@@ -120,7 +144,7 @@ export default function RequestPage() {
                 <motion.button
                   className="px-8 py-3 rounded-full text-sm font-bold"
                   style={{ background: `${MINT}18`, border: `1px solid ${MINT}40`, color: MINT }}
-                  onClick={() => { setSubmitted(false); setSelectedTypes([]); setForm({ name: "", email: "", company: "", location: "", foot: "", details: "" }); }}
+                  onClick={() => { setSubmitted(false); setError(""); setSelectedTypes([]); setForm({ name: "", email: "", company: "", location: "", foot: "", details: "" }); }}
                   whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                 >
                   Submit Another Request
@@ -134,6 +158,14 @@ export default function RequestPage() {
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }} transition={{ duration: 0.4 }}
               >
+                <input
+                  type="text"
+                  name="companyWebsite"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  className="hidden"
+                  aria-hidden="true"
+                />
 
                 {/* Machine type selector */}
                 <div className="rounded-2xl border p-6" style={{ background: "rgba(255,255,255,0.02)", borderColor: `${MINT}18` }}>
@@ -233,17 +265,20 @@ export default function RequestPage() {
                 {/* Submit */}
                 <motion.button
                   type="submit"
+                  disabled={isPending}
                   className="w-full py-5 rounded-2xl font-bold text-lg tracking-wide"
                   style={{
                     background: `linear-gradient(135deg, ${MINT}, ${AMBER})`,
                     color: "#0A0A0F",
                     boxShadow: `0 0 40px ${MINT}50`,
+                    opacity: isPending ? 0.75 : 1,
                   }}
                   whileHover={{ scale: 1.02, boxShadow: `0 0 60px ${MINT}80` }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Send My Request →
+                  {isPending ? "Sending..." : "Send My Request →"}
                 </motion.button>
+                {error && <p className="text-sm text-red-300">{error}</p>}
                 <p className="text-center text-white/20 text-xs">
                   We typically respond within 48 hours. No commitment required — this is just the start of a conversation.
                 </p>

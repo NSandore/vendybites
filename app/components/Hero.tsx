@@ -103,6 +103,10 @@ export default function Hero() {
                 See Our Machines
               </motion.button>
             </Link>
+
+            <Link href="/connecticut-vending-machines" className="self-center text-sm font-bold text-white/55 transition-colors hover:text-white">
+              Connecticut vending machine service
+            </Link>
           </motion.div>
 
           <motion.div

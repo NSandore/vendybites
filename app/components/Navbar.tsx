@@ -10,6 +10,7 @@ const AMBER = "#fed383";
 
 const navLinks = [
   { label: "Home",           href: "/"               },
+  { label: "CT Vending",     href: "/connecticut-vending-machines" },
   { label: "Our Machines",   href: "/our-machines"   },
   { label: "For Businesses", href: "/for-businesses" },
   { label: "About",          href: "/about"          },

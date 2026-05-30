@@ -11,8 +11,11 @@ const navCols = [
     title: "Pages",
     links: [
       { label: "Home",           href: "/"               },
+      { label: "Connecticut Vending Machines", href: "/connecticut-vending-machines" },
       { label: "Our Machines",   href: "/our-machines"   },
       { label: "For Businesses", href: "/for-businesses" },
+      { label: "Service Areas",   href: "/locations"      },
+      { label: "Industries",      href: "/industries"     },
       { label: "About",          href: "/about"          },
       { label: "Contact",        href: "/contact"        },
     ],
@@ -34,6 +37,8 @@ const navCols = [
       { label: "For Businesses", href: "/for-businesses" },
       { label: "Contact",        href: "/contact"        },
       { label: "Partner With Us", href: "/for-businesses#partner-form" },
+      { label: "Service Areas",   href: "/locations" },
+      { label: "CT Vending Machines", href: "/connecticut-vending-machines" },
     ],
   },
 ];

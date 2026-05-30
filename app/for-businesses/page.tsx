@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import Footer from "../components/Footer";
 
 const MINT  = "#aaf0ee";
@@ -50,10 +50,33 @@ export default function ForBusinessesPage() {
     name: "", business: "", city: "", spaceType: "",
     footTraffic: "", productCategory: "", contact: "", notes: "",
   });
+  const [error, setError] = useState("");
+  const [isPending, startTransition] = useTransition();
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setSubmitted(true);
+    setError("");
+
+    startTransition(async () => {
+      const response = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          kind: "business",
+          ...form,
+          companyWebsite: "",
+        }),
+      });
+
+      const result = (await response.json().catch(() => null)) as { error?: string } | null;
+
+      if (!response.ok) {
+        setError(result?.error ?? "We couldn't send your request right now.");
+        return;
+      }
+
+      setSubmitted(true);
+    });
   }
 
   function field(key: keyof typeof form, label: string, placeholder: string, type = "text", required = true) {
@@ -205,6 +228,7 @@ export default function ForBusinessesPage() {
                   style={{ background: `${MINT}18`, border: `1px solid ${MINT}40`, color: MINT }}
                   onClick={() => {
                     setSubmitted(false);
+                    setError("");
                     setForm({ name: "", business: "", city: "", spaceType: "", footTraffic: "", productCategory: "", contact: "", notes: "" });
                   }}
                 >
@@ -220,6 +244,14 @@ export default function ForBusinessesPage() {
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }} transition={{ duration: 0.4 }}
               >
+                <input
+                  type="text"
+                  name="companyWebsite"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  className="hidden"
+                  aria-hidden="true"
+                />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   {field("name", "Your Name", "Jane Smith")}
                   {field("business", "Business Name", "Acme Fitness")}
@@ -286,17 +318,20 @@ export default function ForBusinessesPage() {
                 </div>
                 <motion.button
                   type="submit"
+                  disabled={isPending}
                   className="w-full py-4 rounded-2xl font-bold text-lg mt-2"
                   style={{
                     background: `linear-gradient(135deg, ${MINT}, ${AMBER})`,
                     color: "#0A0A0F",
                     boxShadow: `0 0 30px ${MINT}50`,
+                    opacity: isPending ? 0.75 : 1,
                   }}
                   whileHover={{ scale: 1.02, boxShadow: `0 0 50px ${MINT}80` }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  Send My Interest
+                  {isPending ? "Sending..." : "Send My Interest"}
                 </motion.button>
+                {error && <p className="text-sm text-red-300">{error}</p>}
                 <p className="text-center text-white/25 text-xs">
                   We typically respond within 24 hours. No commitment required. This is just the start of a conversation.
                 </p>
